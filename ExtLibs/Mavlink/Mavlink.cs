@@ -77,6 +77,7 @@ public partial class MAVLink
 		new message_info(49, "GPS_GLOBAL_ORIGIN", 39, 12, 12, typeof( mavlink_gps_global_origin_t )),
 		new message_info(50, "PARAM_MAP_RC", 78, 37, 37, typeof( mavlink_param_map_rc_t )),
 		new message_info(51, "MISSION_REQUEST_INT", 196, 4, 5, typeof( mavlink_mission_request_int_t )),
+		new message_info(52, "MSG_SONAR", 100, 20, 20, typeof( mavlink_sonar_raw_int_t )),
 		new message_info(54, "SAFETY_SET_ALLOWED_AREA", 15, 27, 27, typeof( mavlink_safety_set_allowed_area_t )),
 		new message_info(55, "SAFETY_ALLOWED_AREA", 3, 25, 25, typeof( mavlink_safety_allowed_area_t )),
 		new message_info(61, "ATTITUDE_QUATERNION_COV", 167, 72, 72, typeof( mavlink_attitude_quaternion_cov_t )),
@@ -328,6 +329,7 @@ SET_GPS_GLOBAL_ORIGIN = 48,
 GPS_GLOBAL_ORIGIN = 49,
 PARAM_MAP_RC = 50,
 MISSION_REQUEST_INT = 51,
+MSG_SONAR = 52,
 SAFETY_SET_ALLOWED_AREA = 54,
 SAFETY_ALLOWED_AREA = 55,
 ATTITUDE_QUATERNION_COV = 61,
@@ -4318,7 +4320,25 @@ AOA_SSA = 11020,
         public  short vz;
             /// <summary> Vehicle heading (yaw angle) in degrees * 100, 0.0..359.99 degrees. If unknown, set to: UINT16_MAX </summary>
         public  ushort hdg;
-    
+    };
+
+    [StructLayout(LayoutKind.Sequential, Pack = 1, Size = 20)]
+    ///<summary> The filtered global position (e.g. fused GPS and accelerometers). The position is in GPS-frame (right-handed, Z-up). It                is designed as scaled integer message since the resolution of float is not sufficient. </summary>
+    public struct mavlink_sonar_raw_int_t
+    {
+        /// <summary> Timestamp (milliseconds since system boot) </summary>
+        public uint time_boot_ms;
+        /// <summary> Latitude, expressed as degrees * 1E7 </summary>
+        public uint gpmtw;
+        /// <summary> Longitude, expressed as degrees * 1E7 </summary>
+        public uint gpdpt;
+        /// <summary> Altitude above ground in meters, expressed as * 1000 (millimeters) </summary>
+        public uint gpvhw_w;
+        /// <summary> Ground X Speed (Latitude, positive north), expressed as m/s * 100 </summary>
+        public ushort gpvhw_h;
+        /// <summary> Ground Y Speed (Longitude, positive east), expressed as m/s * 100 </summary>
+        public ushort gpmda;
+
     };
 
 

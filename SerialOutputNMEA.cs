@@ -25,6 +25,8 @@ namespace MissionPlanner
         public SerialOutputNMEA()
         {
             InitializeComponent();
+            this.Width = 260;
+            this.Height = 120;
 
             CMB_serialport.Items.AddRange(SerialPort.GetPortNames());
             CMB_serialport.Items.Add("TCP Host - 14551");

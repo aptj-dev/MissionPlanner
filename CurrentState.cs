@@ -2147,6 +2147,13 @@ namespace MissionPlanner
                         }
                     }
 
+                    mavLinkMessage = MAV.getPacket((uint)MAVLink.MAVLINK_MSG_ID.MSG_SONAR);
+                    if (mavLinkMessage != null)
+                    {
+                        var loc = mavLinkMessage.ToStructure<MAVLink.mavlink_sonar_raw_int_t>();
+                        uint wk = loc.gpdpt;
+
+                    }
                     mavLinkMessage = MAV.getPacket((uint) MAVLink.MAVLINK_MSG_ID.GPS_RAW_INT);
                     if (mavLinkMessage != null)
                     {

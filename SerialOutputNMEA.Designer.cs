@@ -33,6 +33,9 @@
             this.BUT_connect = new MissionPlanner.Controls.MyButton();
             this.CMB_baudrate = new System.Windows.Forms.ComboBox();
             this.CMB_updaterate = new System.Windows.Forms.ComboBox();
+            this.CHK_kind1 = new System.Windows.Forms.CheckBox();
+            this.CHK_kind2 = new System.Windows.Forms.CheckBox();
+
             this.SuspendLayout();
             // 
             // CMB_serialport
@@ -79,6 +82,12 @@
             resources.ApplyResources(this.CMB_updaterate, "CMB_updaterate");
             this.CMB_updaterate.Name = "CMB_updaterate";
             this.CMB_updaterate.SelectedIndexChanged += new System.EventHandler(this.CMB_updaterate_SelectedIndexChanged);
+            this.CHK_kind1.Text = "GPS";
+            this.CHK_kind1.Location = new System.Drawing.Point(10, 65);
+            this.CHK_kind1.Size = new System.Drawing.Size(100,15);
+            this.CHK_kind2.Text = "SONAR";
+            this.CHK_kind2.Location = new System.Drawing.Point(110, 65);
+            this.CHK_kind2.Size = new System.Drawing.Size(100,15);
             // 
             // SerialOutputNMEA
             // 
@@ -88,6 +97,8 @@
             this.Controls.Add(this.CMB_baudrate);
             this.Controls.Add(this.BUT_connect);
             this.Controls.Add(this.CMB_serialport);
+            this.Controls.Add(this.CHK_kind1);
+            this.Controls.Add(this.CHK_kind2);
             this.Name = "SerialOutputNMEA";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SerialOutput_FormClosing);
             this.ResumeLayout(false);
@@ -100,5 +111,7 @@
         private Controls.MyButton BUT_connect;
         private System.Windows.Forms.ComboBox CMB_baudrate;
         private System.Windows.Forms.ComboBox CMB_updaterate;
+        private System.Windows.Forms.CheckBox CHK_kind1;
+        private System.Windows.Forms.CheckBox CHK_kind2;
     }
 }
