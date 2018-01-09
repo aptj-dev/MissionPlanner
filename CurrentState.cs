@@ -104,6 +104,23 @@ namespace MissionPlanner
 
         private float _groundcourse = 0;
 
+        // sonar
+        [DisplayText("gpmtw")]
+        public uint gpmtw { get; set; }
+        /// <summary> Longitude, expressed as degrees * 1E7 </summary>
+        [DisplayText("gpdpt")]
+        public uint gpdpt { get; set; }
+        /// <summary> Altitude above ground in meters, expressed as * 1000 (millimeters) </summary>
+        [DisplayText("gpvhw_w")]
+        public uint gpvhw_w { get; set; }
+        /// <summary> Ground X Speed (Latitude, positive north), expressed as m/s * 100 </summary>
+        [DisplayText("gpvhw_h")]
+        public ushort gpvhw_h { get; set; }
+        /// <summary> Ground Y Speed (Longitude, positive east), expressed as m/s * 100 </summary>
+        [DisplayText("gpmda")]
+        public ushort gpmda { get; set; }
+
+
         // position
         [DisplayText("Latitude")]
         public double lat { get; set; }
@@ -2151,7 +2168,13 @@ namespace MissionPlanner
                     if (mavLinkMessage != null)
                     {
                         var loc = mavLinkMessage.ToStructure<MAVLink.mavlink_sonar_raw_int_t>();
-                        uint wk = loc.gpdpt;
+
+                        gpmtw = loc.gpmtw;
+                        gpdpt = loc.gpdpt;
+                        gpvhw_w = loc.gpvhw_w;
+                        gpvhw_h = loc.gpvhw_h;
+                        gpmda = loc.gpmda;
+
 
                     }
                     mavLinkMessage = MAV.getPacket((uint) MAVLink.MAVLINK_MSG_ID.GPS_RAW_INT);

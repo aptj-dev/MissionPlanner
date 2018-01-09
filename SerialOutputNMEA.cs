@@ -181,7 +181,19 @@ namespace MissionPlanner
 
                     checksum = GetChecksum(line);
                     NmeaStream.WriteLine(line + "*" + checksum);
-                    
+
+                    line = string.Format(System.Globalization.CultureInfo.InvariantCulture, "$GPMTW,{0},C*3E", ((double)MainV2.comPort.MAV.cs.gpmtw/100.0).ToString());
+                    NmeaStream.WriteLine(line);
+
+                    line = string.Format(System.Globalization.CultureInfo.InvariantCulture, "$GPDPT,,{0},*55", ((double)MainV2.comPort.MAV.cs.gpdpt / 100.0).ToString());
+                    NmeaStream.WriteLine(line);
+
+                    line = string.Format(System.Globalization.CultureInfo.InvariantCulture, "$GPVHW,,,,,{0},N,{1},K*5B", ((double)MainV2.comPort.MAV.cs.gpvhw_h / 100.0).ToString(), ((double)MainV2.comPort.MAV.cs.gpvhw_w / 100.0).ToString());
+                    NmeaStream.WriteLine(line);
+
+                    line = string.Format(System.Globalization.CultureInfo.InvariantCulture, "$GPMDA,,,,,,,{0},C,,,,,,,,,,,,*32", ((double)MainV2.comPort.MAV.cs.gpmda / 100.0).ToString());
+                    NmeaStream.WriteLine(line);
+
                     var nextsend = DateTime.Now.AddMilliseconds(1000 / updaterate);
                     var sleepfor = Math.Min((int)Math.Abs((nextsend - DateTime.Now).TotalMilliseconds), 4000);
                     System.Threading.Thread.Sleep(sleepfor);
